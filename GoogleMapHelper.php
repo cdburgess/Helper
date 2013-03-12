@@ -29,43 +29,41 @@
  *	),
  * );
  */
-class GoogleMapHelper extends Helper
-{
-	/**
- 	* Other helpers used by GoogleMapHelper
- 	*
- 	* @var array
- 	* @access public
- 	*/
-	var $helpers = array('Html','Javascript');
+App::uses('AppHelper', 'View/Helper');
+class GoogleMapHelper extends Helper {
+
+/**
+ * Other helpers used by GoogleMapHelper
+ *
+ * @var array
+ * @access public
+ */
+	public $helpers = array('Html','Javascript');
 	
-	/**
-	 * Googl Maps base URL
-	 *
-	 * @var string
-	 * @access public
-	 */
+/**
+ * Googl Maps base URL
+ *
+ * @var string
+ * @access public
+ */
 	private $base_url = "http://maps.google.com/maps";
 	
-	/**
-	 * ShowMap
-	 *
-	 * Will display a map on the webpage in the location you call it.
-	 *
-	 * @param array $points		Each point on the map you want to put a marker
-	 * @param array $style		Formatting information for the map
-	 * @access public
-	 */
-	function show_map($points, $api_key = null, $style = array('zoom' => 14, 'width' => '500px', 'height' => '300px', 'class' => 'map', 'id' => 'map_canvas', 'map_type' => 'ROADMAP'))
-	{
+/**
+ * ShowMap
+ *
+ * Will display a map on the webpage in the location you call it.
+ *
+ * @param array $points		Each point on the map you want to put a marker
+ * @param array $style		Formatting information for the map
+ * @access public
+ */
+	public function show_map($points, $api_key = null, $style = array('zoom' => 14, 'width' => '500px', 'height' => '300px', 'class' => 'map', 'id' => 'map_canvas', 'map_type' => 'ROADMAP')) {
 		// if multiple points are set, map them
-		if(is_array($points))
-		{
+		if (is_array($points)) {
 			$count = 0;
 			
 			// process each item in the array
-			foreach($points as $marker)
-			{	
+			foreach ($points as $marker) {	
 				$count ++;
 				$content = '<b>'.$marker['name'].'</b><br />'.$marker['street'].'<br />'.$marker['city'].', '.$marker['state'].' '.$marker['zipcode'].'<br /><br />'.$marker['description'];
 				$markers[] = "['".$content ."', ".$marker['latitude'].", ".$marker['longitude'].", ".$count."]";
@@ -144,4 +142,3 @@ class GoogleMapHelper extends Helper
 	}
 
 }
-?>
